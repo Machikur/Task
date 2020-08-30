@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Entity(name="tasks")
+@Entity(name = "tasks")
 public class Task {
     @Id
     @GeneratedValue
