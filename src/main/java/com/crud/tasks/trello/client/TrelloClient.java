@@ -22,17 +22,15 @@ import java.util.Optional;
 public class TrelloClient {
 
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class);
     @Autowired
     private RestTemplate restTemplate;
-
     @Autowired
     private TrelloConfig trelloConfig;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class);
-
     public List<TrelloBoardDto> getTrelloBoards() {
         try {
-            TrelloBoardDto[] boardsResponse=restTemplate.getForObject(getBoardsUrl(),TrelloBoardDto[].class);
+            TrelloBoardDto[] boardsResponse = restTemplate.getForObject(getBoardsUrl(), TrelloBoardDto[].class);
             return Arrays.asList(Optional.ofNullable(boardsResponse).orElse(new TrelloBoardDto[0]));
         } catch (RestClientException e) {
             LOGGER.error(e.getMessage(), e);
