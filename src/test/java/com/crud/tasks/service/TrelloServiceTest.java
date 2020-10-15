@@ -38,6 +38,7 @@ public class TrelloServiceTest {
         TrelloCardDto trelloCardDto = new TrelloCardDto();
         when(trelloClient.createNewCard(any())).thenReturn(
                 new CreatedTrelloCardDto("test_id", "test_name", "test_Url", new TrelloBadges()));
+        when(adminConfig.getAdminMail()).thenReturn("Admin");
 
         //when
         CreatedTrelloCardDto createdCard= trelloService.createdTrelloCard(trelloCardDto);
