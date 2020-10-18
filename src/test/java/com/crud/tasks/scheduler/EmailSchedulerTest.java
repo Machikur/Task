@@ -1,7 +1,6 @@
 package com.crud.tasks.scheduler;
 
 import com.crud.tasks.config.AdminConfig;
-import com.crud.tasks.domain.mail.Mail;
 import com.crud.tasks.repository.TaskRepository;
 import com.crud.tasks.service.SimpleEmailService;
 import org.junit.Test;

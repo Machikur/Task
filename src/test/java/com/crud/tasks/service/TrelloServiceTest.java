@@ -1,7 +1,6 @@
 package com.crud.tasks.service;
 
 import com.crud.tasks.config.AdminConfig;
-import com.crud.tasks.domain.mail.Mail;
 import com.crud.tasks.trello.CreatedTrelloCardDto;
 import com.crud.tasks.trello.TrelloBadges;
 import com.crud.tasks.trello.TrelloCardDto;
@@ -41,11 +40,11 @@ public class TrelloServiceTest {
         when(adminConfig.getAdminMail()).thenReturn("Admin");
 
         //when
-        CreatedTrelloCardDto createdCard= trelloService.createdTrelloCard(trelloCardDto);
+        CreatedTrelloCardDto createdCard = trelloService.createdTrelloCard(trelloCardDto);
 
         //then
-        verify(simpleEmailService,times(1)).send(any());
-        Assert.assertEquals(createdCard.getId(),"test_id");
+        verify(simpleEmailService, times(1)).send(any());
+        Assert.assertEquals(createdCard.getId(), "test_id");
     }
 
 

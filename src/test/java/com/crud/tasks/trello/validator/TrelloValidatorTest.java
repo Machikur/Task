@@ -1,8 +1,6 @@
 package com.crud.tasks.trello.validator;
 
 import com.crud.tasks.domain.TrelloBoard;
-import com.crud.tasks.domain.TrelloCard;
-import com.crud.tasks.trello.TrelloCardDto;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,10 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
-
-import static org.junit.Assert.*;
-
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 public class TrelloValidatorTest {
@@ -29,23 +23,23 @@ public class TrelloValidatorTest {
     private TrelloValidator trelloValidator;
 
     @Mock
-    private Logger logger= LoggerFactory.getLogger(TrelloValidator.class);
+    private Logger logger = LoggerFactory.getLogger(TrelloValidator.class);
 
     @Test
-    public void validateTrelloBoards(){
+    public void validateTrelloBoards() {
         //given
         List<TrelloBoard> trelloBoards = new ArrayList<>(Arrays.asList(
-                new TrelloBoard("test","test", new ArrayList<>()),
-                new TrelloBoard("test","test", new ArrayList<>()),
-                new TrelloBoard("test","test", new ArrayList<>()),
-                new TrelloBoard("nothing","nothing", new ArrayList<>())
+                new TrelloBoard("test", "test", new ArrayList<>()),
+                new TrelloBoard("test", "test", new ArrayList<>()),
+                new TrelloBoard("test", "test", new ArrayList<>()),
+                new TrelloBoard("nothing", "nothing", new ArrayList<>())
         ));
 
         //when
-        List<TrelloBoard> filteredList=trelloValidator.validateTrelloBoards(trelloBoards);
+        List<TrelloBoard> filteredList = trelloValidator.validateTrelloBoards(trelloBoards);
 
         //then
-        Assert.assertEquals(3,filteredList.size());
-        Assert.assertNotEquals(trelloBoards.size(),filteredList.size());
+        Assert.assertEquals(3, filteredList.size());
+        Assert.assertNotEquals(trelloBoards.size(), filteredList.size());
     }
 }
