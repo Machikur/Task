@@ -27,36 +27,38 @@ public class SimpleEmailService {
     }
 
 
-
-
-    public void send(Mail mail) {
+    public void send(Mail mail,boolean toAdmin) {
         try {
-            javaMailSender.send(createMimeMessage(mail));
+            javaMailSender.send(createMimeMessage(mail, toAdmin));
             LOGGER.info("Email has been sent");
         } catch (MailException s) {
             LOGGER.error("Failed to process email sending", s.getMessage(), s);
         }
     }
 
-    private MimeMessagePreparator createMimeMessage(final Mail mail){
+    private MimeMessagePreparator createMimeMessage(final Mail mail, final boolean toAdmin) {
         return mimeMessage -> {
-            MimeMessageHelper messageHelper= new MimeMessageHelper(mimeMessage);
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()));
+            if (toAdmin) {
+                messageHelper.setText(mailCreatorService.buildAdminEmail(mail.getMessage()),true);
+            } else {
+                messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()),true);
+            }
         };
     }
 
-    private SimpleMailMessage createMessage(Mail mail) {
-        SimpleMailMessage emailMessage = new SimpleMailMessage();
-        emailMessage.setTo(mail.getMailTo());
-        emailMessage.setSubject(mail.getSubject());
-        emailMessage.setText(mail.getMessage());
+        private SimpleMailMessage createMessage (Mail mail){
+            SimpleMailMessage emailMessage = new SimpleMailMessage();
+            emailMessage.setTo(mail.getMailTo());
+            emailMessage.setSubject(mail.getSubject());
+            emailMessage.setText(mail.getMessage());
 
-        String cc = mail.getCc();
-        if (!StringUtils.isEmpty(cc)) {
-            emailMessage.setCc(cc);
+            String cc = mail.getCc();
+            if (!StringUtils.isEmpty(cc)) {
+                emailMessage.setCc(cc);
+            }
+            return emailMessage;
         }
-        return emailMessage;
     }
-}

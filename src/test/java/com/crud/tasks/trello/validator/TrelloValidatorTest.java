@@ -33,7 +33,7 @@ public class TrelloValidatorTest {
         List<TrelloBoard> filteredList = trelloValidator.validateTrelloBoards(trelloBoards);
 
         //then
-        Assert.assertEquals(3, filteredList.size());
+        Assert.assertEquals(1, filteredList.size());
         Assert.assertNotEquals(trelloBoards.size(), filteredList.size());
     }
 }

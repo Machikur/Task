@@ -50,7 +50,7 @@ public class TaskControllerTest {
         when(taskMapper.mapToTaskDtoList(anyList())).thenReturn(taskDtoList);
 
         //when & then
-        mockMvc.perform(get("/v1/task/getTasks")
+        mockMvc.perform(get("/v1/tasks")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()", is(3)))
@@ -69,8 +69,7 @@ public class TaskControllerTest {
         when(dbService.getTaskById(anyLong())).thenReturn(taskOptional);
         when(taskMapper.mapToTaskDto(any())).thenReturn(taskDto);
         //when & then
-        mockMvc.perform(get("/v1/task/getTask")
-                .param("taskId", "1")
+        mockMvc.perform(get("/v1/tasks/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.title", is("Test")))
@@ -86,8 +85,7 @@ public class TaskControllerTest {
         Optional<Task> taskOptional = Optional.of(task);
         when(dbService.getTaskById(anyLong())).thenReturn(taskOptional);
         //when & then
-        mockMvc.perform(delete("/v1/task/deleteTask")
-                .param("taskId", "1")
+        mockMvc.perform(delete("/v1/tasks/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         verify(dbService, times(1)).deleteTask(any());
@@ -102,7 +100,7 @@ public class TaskControllerTest {
         String jsonTaskDto = gson.toJson(taskDto);
 
         //when & then
-        mockMvc.perform(put("/v1/task/updateTask")
+        mockMvc.perform(put("/v1/tasks")
                 .content(jsonTaskDto)
                 .characterEncoding("UTF-8")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -124,7 +122,7 @@ public class TaskControllerTest {
         String jsonTaskDto = gson.toJson(taskDto);
 
         //when & then
-        mockMvc.perform(post("/v1/task/createTask")
+        mockMvc.perform(post("/v1/tasks")
                 .content(jsonTaskDto)
                 .characterEncoding("UTF-8")
                 .contentType(MediaType.APPLICATION_JSON))

@@ -5,7 +5,7 @@ echo Server ERROR
 goto fail
 
 :browser
-call start chrome.exe http://localhost:8080/crud/v1/task/getTasks
+call start chrome.exe http://localhost:8080/crud/v1/task
 goto end
 
 :fail

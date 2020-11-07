@@ -23,7 +23,7 @@ public class EmailScheduler {
         this.adminConfig = adminConfig;
     }
 
-    @Scheduled(cron = "*/10 * * * * *")
+    @Scheduled(cron = "0 0 10 * * *")
     public void sendInformationEmail() {
         String tasksString = "Tasks";
         long size = taskRepository.count();
@@ -33,7 +33,7 @@ public class EmailScheduler {
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminMail(),
                 SUBJECT,
-                "Currently you've got " + size + " " + tasksString));
+                "Currently you've got " + size + " " + tasksString),true);
 
     }
 }

@@ -43,7 +43,7 @@ public class TrelloServiceTest {
         CreatedTrelloCardDto createdCard = trelloService.createdTrelloCard(trelloCardDto);
 
         //then
-        verify(simpleEmailService, times(1)).send(any());
+        verify(simpleEmailService, times(1)).send(any(),eq(false));
         Assert.assertEquals(createdCard.getId(), "test_id");
     }
 

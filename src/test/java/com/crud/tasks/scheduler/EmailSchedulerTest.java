@@ -37,7 +37,7 @@ public class EmailSchedulerTest {
         emailScheduler.sendInformationEmail();
 
         //then
-        verify(simpleEmailService, times(1)).send(any());
+        verify(simpleEmailService, times(1)).send(any(),eq(true));
     }
 
 }
